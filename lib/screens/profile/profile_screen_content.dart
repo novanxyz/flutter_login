@@ -49,7 +49,10 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                       return const CircleAvatar(
                         backgroundColor: Colors.blue,
                         radius: 80,
-                        child: Icon(Icons.person,size: 100,),
+                        child: Icon(
+                          Icons.person,
+                          size: 100,
+                        ),
                       );
                     },
                   ),
@@ -120,7 +123,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
               children: [
                 ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.red)),
+                      backgroundColor: WidgetStateProperty.all(Colors.blueGrey)),
                   onPressed: () async {
                     GoogleSignInAccount? user = await LoginApi.signOut();
                     if (user == null && context.mounted) {
@@ -145,7 +148,7 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
                 const Gap(6),
                 ElevatedButton(
                   onPressed: () {
-                  GoRouter.of(context).pushNamed(AppRoutes.qrScreen);
+                    GoRouter.of(context).pushNamed(AppRoutes.qrScreen);
                   },
                   child: const Text(
                     'Login Aplikasi',
@@ -191,17 +194,15 @@ class _ProfileScreenContentState extends State<ProfileScreenContent> {
 
       if (availableBiometrics.isNotEmpty) {
         try {
-          final bool didAuthenticate = await auth.authenticate(
-              authMessages: [
-                const  AndroidAuthMessages(
-                  signInTitle: 'Lakukan Verifikasi',
-                  biometricHint: '',
-                  cancelButton: 'Batalkan',
-                  biometricRequiredTitle: 'Letakkan sidik jari anda',
-                  biometricNotRecognized: 'Sidik jari Salah',
-                ),
-              ],
-              localizedReason: 'Verifikasi diperlukan untuk mengakses fitur');
+          final bool didAuthenticate = await auth.authenticate(authMessages: [
+            const AndroidAuthMessages(
+              signInTitle: 'Lakukan Verifikasi',
+              biometricHint: '',
+              cancelButton: 'Batalkan',
+              biometricRequiredTitle: 'Letakkan sidik jari anda',
+              biometricNotRecognized: 'Sidik jari Salah',
+            ),
+          ], localizedReason: 'Verifikasi diperlukan untuk mengakses fitur');
           if (didAuthenticate && context.mounted) {
             GoRouter.of(context).pushNamed(AppRoutes.calendarScreen);
           }

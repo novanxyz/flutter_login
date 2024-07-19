@@ -28,7 +28,7 @@ class LoginScreenContent extends StatelessWidget {
             ),
             const Gap(150),
             const Text(
-              'Welcome to Harman App',
+              'Welcome to Harman Login App',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             const Gap(32),
@@ -44,7 +44,8 @@ class LoginScreenContent extends StatelessWidget {
                           photoUrl: user.photoUrl,
                         ),
                       );
-                  GoRouter.of(context).pushReplacementNamed(AppRoutes.profileScreen);
+                  GoRouter.of(context)
+                      .pushReplacementNamed(AppRoutes.profileScreen);
                 }
               },
               child: Row(
